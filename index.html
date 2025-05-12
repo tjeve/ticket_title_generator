@@ -4,72 +4,32 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ticket Title Generator</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='15' ry='15' fill='%233B82F6'/%3E%3Ctext x='50' y='55' font-size='38' text-anchor='middle' fill='white' font-family='Arial' dy='.3em'%3ETT%3C/text%3E%3C/svg%3E">
-  <script>
-  window.tailwind = {
-    config: {
-      darkMode: 'class'
-    }
-  };
-</script>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    html {
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-    body {
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-  </style>
-  <script>
-    function toggleTheme() {
-      const html = document.documentElement;
-      html.classList.toggle('dark');
-      const isDark = html.classList.contains('dark');
-      localStorage.setItem('theme', isDark ? 'dark' : 'light');
-      document.getElementById('themeIcon').textContent = isDark ? '☀️' : '🌙';
-    }
-
-    window.addEventListener('DOMContentLoaded', () => {
-      const savedTheme = localStorage.getItem('theme');
-      if (savedTheme === 'dark') {
-        document.documentElement.classList.add('dark');
-        document.getElementById('themeIcon').textContent = '☀️';
-      } else {
-        document.getElementById('themeIcon').textContent = '🌙';
-      }
-    });
-  </script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body class="bg-gray-100 dark:bg-gray-900 font-sans text-gray-900 dark:text-gray-100">
-  <div class="max-w-xl mx-auto mt-10 p-6 bg-white dark:bg-gray-800 shadow-lg rounded-xl">
-    <div class="flex justify-between items-center mb-6">
-      <h1 class="text-2xl font-semibold text-center text-gray-800 dark:text-gray-100">ADI Ticket Title Generator</h1>
-      <button onclick="toggleTheme()" class="p-2 text-xl bg-gray-200 dark:bg-gray-700 rounded" title="Toggle Theme">
-        <span id="themeIcon">🌙</span>
-      </button>
+<body class="bg-gray-100 font-sans">
+  <div class="max-w-xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-xl">
+    <h1 class="text-2xl font-semibold text-center text-gray-800 mb-6">ADI Ticket Title Generator</h1>
+
+    <div class="mb-4">
+      <label class="block font-medium text-gray-700 mb-1">Upload CSV</label>
+      <input type="file" id="csvUpload" accept=".csv" class="block w-full text-sm text-gray-600 bg-gray-50 border border-gray-300 rounded px-3 py-2">
     </div>
 
     <div class="mb-4">
-      <label class="block font-medium text-gray-700 dark:text-gray-200 mb-1">Upload CSV</label>
-      <input type="file" id="csvUpload" accept=".csv" class="block w-full text-sm text-gray-600 bg-gray-50 dark:bg-gray-700 border border-gray-300 rounded px-3 py-2">
+      <label for="resourceSearch" class="block font-medium text-gray-700 mb-1">Search Resource</label>
+      <input type="text" id="resourceSearch" placeholder="Type to search..." class="block w-full border-gray-300 rounded px-3 py-2 shadow-sm focus:ring-blue-500 focus:border-blue-500">
     </div>
 
     <div class="mb-4">
-      <label for="resourceSearch" class="block font-medium text-gray-700 dark:text-gray-200 mb-1">Search Resource</label>
-      <input type="text" id="resourceSearch" placeholder="Type to search..." class="block w-full border-gray-300 rounded px-3 py-2 shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-    </div>
-
-    <div class="mb-4">
-      <label for="resourceSelect" class="block font-medium text-gray-700 dark:text-gray-200 mb-1">Select Resource</label>
-      <select id="resourceSelect" class="block w-full border-gray-300 rounded px-3 py-2 shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+      <label for="resourceSelect" class="block font-medium text-gray-700 mb-1">Select Resource</label>
+      <select id="resourceSelect" class="block w-full border-gray-300 rounded px-3 py-2 shadow-sm focus:ring-blue-500 focus:border-blue-500">
         <option value="">-- Upload CSV First --</option>
       </select>
     </div>
 
     <div class="mb-4">
-      <label for="ticketType" class="block font-medium text-gray-700 dark:text-gray-200 mb-1">Ticket Type</label>
-      <select id="ticketType" class="block w-full border-gray-300 rounded px-3 py-2 shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+      <label for="ticketType" class="block font-medium text-gray-700 mb-1">Ticket Type</label>
+      <select id="ticketType" class="block w-full border-gray-300 rounded px-3 py-2 shadow-sm focus:ring-blue-500 focus:border-blue-500">
         <option value="">-- Select Ticket Type --</option>
         <option value="Access">Access</option>
         <option value="Troubleshooting">Troubleshooting</option>
@@ -79,22 +39,128 @@
     </div>
 
     <div class="mb-4">
-      <label for="issueInput" class="block font-medium text-gray-700 dark:text-gray-200 mb-1">Issue <span class="text-sm text-gray-500">(optional)</span></label>
-      <input type="text" id="issueInput" class="block w-full border-gray-300 rounded px-3 py-2 shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+      <label for="issueInput" class="block font-medium text-gray-700 mb-1">Issue <span class="text-sm text-gray-500">(optional)</span></label>
+      <input type="text" id="issueInput" class="block w-full border-gray-300 rounded px-3 py-2 shadow-sm focus:ring-blue-500 focus:border-blue-500">
     </div>
 
     <button id="generateBtn" class="w-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Generate Title</button>
 
     <div class="mt-6">
-      <h3 class="font-semibold text-gray-800 dark:text-gray-100 mb-1">Generated Title:</h3>
+      <h3 class="font-semibold text-gray-800 mb-1">Generated Title:</h3>
       <div class="flex items-center gap-2">
-        <p id="output" class="flex-1 bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 p-3 rounded text-gray-700 dark:text-white"></p>
+        <p id="output" class="flex-1 bg-gray-100 border border-gray-300 p-3 rounded text-gray-700"></p>
         <button id="copyBtn" class="px-3 py-2 bg-green-600 text-white rounded hover:bg-green-700">Copy</button>
       </div>
     </div>
   </div>
 
-  <!-- JavaScript remains unchanged -->
-  <script>/* JavaScript from previous version remains intact */</script>
+  <script>
+    let resourceData = {}; // { "Resource Name": "Code" }
+    let allResources = [];
+
+    document.getElementById('csvUpload').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const text = e.target.result;
+        parseCSV(text);
+      };
+      reader.readAsText(file);
+    });
+
+    function parseCSV(text) {
+      const lines = text.trim().split('\n');
+      const header = lines[0].split(',').map(h => h.trim());
+      const codeIndex = header.indexOf("Digital Resource Code");
+      const nameIndex = header.indexOf("Resource Name");
+
+      if (codeIndex === -1 || nameIndex === -1) {
+        alert("CSV must contain 'Resource Name' and 'Digital Resource Code' headers.");
+        return;
+      }
+
+      resourceData = {};
+      allResources = [];
+      const select = document.getElementById('resourceSelect');
+      select.innerHTML = '<option value="">-- Select Resource --</option>';
+
+      for (let i = 1; i < lines.length; i++) {
+        const values = lines[i].split(',').map(x => x.trim());
+        const code = values[codeIndex];
+        const name = values[nameIndex];
+        if (code && name) {
+          resourceData[name] = code;
+          allResources.push(name);
+          const option = document.createElement('option');
+          option.value = name;
+          option.textContent = name;
+          select.appendChild(option);
+        }
+      }
+    }
+
+    document.getElementById('resourceSearch').addEventListener('input', function() {
+      const query = this.value.toLowerCase();
+      const select = document.getElementById('resourceSelect');
+      select.innerHTML = '<option value="">-- Select Resource --</option>';
+      for (const name of allResources) {
+        if (name.toLowerCase().includes(query)) {
+          const option = document.createElement('option');
+          option.value = name;
+          option.textContent = name;
+          select.appendChild(option);
+        }
+      }
+    });
+
+    document.getElementById('generateBtn').addEventListener('click', function() {
+      const resourceName = document.getElementById('resourceSelect').value;
+      const ticketType = document.getElementById('ticketType').value;
+      const issue = document.getElementById('issueInput').value.trim();
+
+      if (!resourceName || !ticketType) {
+        alert('Please select a resource and ticket type.');
+        return;
+      }
+
+      const code = resourceData[resourceName];
+      const title = issue ? `${code} - ${resourceName} - ${ticketType} - ${issue}` : `${code} - ${resourceName} - ${ticketType}`;
+      document.getElementById('output').textContent = title;
+    });
+
+    document.getElementById('copyBtn').addEventListener('click', function() {
+      const text = document.getElementById('output').textContent;
+      if (!text) return;
+
+      try {
+        navigator.clipboard.writeText(text)
+          .then(() => alert("Copied to clipboard!"))
+          .catch(err => {
+            console.error("Copy failed: ", err);
+            fallbackCopy(text);
+          });
+      } catch (err) {
+        console.error("Clipboard API not available: ", err);
+        fallbackCopy(text);
+      }
+    });
+
+    function fallbackCopy(text) {
+      const tempInput = document.createElement('textarea');
+      tempInput.value = text;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      try {
+        document.execCommand('copy');
+        alert("Copied to clipboard using fallback!");
+      } catch (err) {
+        alert("Failed to copy.");
+      }
+      document.body.removeChild(tempInput);
+    }
+  </script>
 </body>
 </html>
+<!-- Comment -->
